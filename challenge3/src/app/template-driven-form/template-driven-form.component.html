@@ -29,7 +29,10 @@
                 <div class="form-group col-8 d-flex">
                     <label class="m-2">Type de carte</label>
                     <input  type="text" class="form-control m-2"  name="type" [(ngModel)]="userModel.type_carte"   #type="ngModel" required [class.is-valid]="type.valid" [class.is-invalid]="type.invalid && type.touched">
+
                 </div>
+                <small class="text-danger" [class.d-none]="type.valid || type.untouched">Le type de la carte est obligatoire</small> 
+
                 <div class="form-group col-8 d-flex">
                     <label class="m-2">Numéro carte</label>
                     <input  type="text" class="form-control m-2" name="num_carte" [(ngModel)]="userModel.num_carte"  #num_carte="ngModel" required [class.is-valid]="num_carte.valid" [class.is-invalid]="num_carte.invalid && num_carte.touched" minlength="16" >
@@ -44,7 +47,7 @@
                     <label class="m-2">Date expiration</label>
                     <input  type="text" class="form-control m-2 " name="date_expiration" [(ngModel)]="userModel.date_expiration"  #date="ngModel" >
                 </div>
-                <div class="form-group col-8 d-flex" [class.d-none]="num_carte.invalid">
+                <div class="form-group col-8 d-flex" [class.d-none]="num_carte.invalid || type.invalid">
                     <label class="m-2">Code</label>
                     <input  type="number" class="form-control m-2 " name="code" [(ngModel)]="userModel.code"  #code="ngModel" >
                 </div>
