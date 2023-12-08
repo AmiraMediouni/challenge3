@@ -1,0 +1,61 @@
+<div class="container my-5" >
+    <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+        <fieldset  class="border p-3">
+            <legend  class="float-none w-auto px-3">Informations générales</legend>
+            <div class="form-group col-8 d-flex ">
+                <label class="m-2">Nom</label>
+                <input  type="text" class="form-control m-2" name="nom" [(ngModel)]="userModel.nom"  #nom="ngModel" required [class.is-valid]="nom.valid" [class.is-invalid]="nom.invalid && nom.touched" minlength="3" >
+
+            </div>
+            <div *ngIf="nom.errors && (nom.invalid || nom.touched)">
+                <small class="text-danger" *ngIf="nom.errors?.['required']">Le nom est obligatoire</small>
+        
+                <small class="text-danger" *ngIf="nom.errors?.['minlength']">Le nom doit avoir au minimum 3 caractères </small>
+        
+              </div>
+
+            <div class="form-group col-8 d-flex">
+                <label class="m-2">Email</label>
+                <input  type="email" class="form-control m-2" name="email" [(ngModel)]="userModel.email"  #email="ngModel" required [class.is-valid]="email.valid" [class.is-invalid]="email.invalid && email.touched" pattern="[a-z0-9]+\.[a-z0-9]+@[a-z0-9.-]+\.[a-z]{3}$" >
+            </div>
+            <div *ngIf="email.errors && (email.invalid || email.touched)">
+                <small class="text-danger" *ngIf="email.errors?.['required']">L'email est obligatoire</small>
+        
+                <small class="text-danger" *ngIf="email.errors?.['pattern']">Le format de l'email est invalide </small>
+        
+              </div>
+            <fieldset  class="border p-3">
+                <legend  class="float-none w-auto px-3">Informations de payement</legend>
+                <div class="form-group col-8 d-flex">
+                    <label class="m-2">Type de carte</label>
+                    <input  type="text" class="form-control m-2"  name="type" [(ngModel)]="userModel.type_carte"   #type="ngModel" required [class.is-valid]="type.valid" [class.is-invalid]="type.invalid && type.touched">
+                </div>
+                <div class="form-group col-8 d-flex">
+                    <label class="m-2">Numéro carte</label>
+                    <input  type="text" class="form-control m-2" name="num_carte" [(ngModel)]="userModel.num_carte"  #num_carte="ngModel" required [class.is-valid]="num_carte.valid" [class.is-invalid]="num_carte.invalid && num_carte.touched" minlength="16" >
+                </div>
+                <div *ngIf="num_carte.errors && (num_carte.invalid || num_carte.touched)">
+                    <small class="text-danger" *ngIf="num_carte.errors?.['required']">Le numéro de la carte est obligatoire</small>
+            
+                    <small class="text-danger" *ngIf="num_carte.errors?.['minlength']">Le numéro de carte contient 16 chiffres </small>
+            
+                  </div>
+                <div class="form-group col-8 d-flex">
+                    <label class="m-2">Date expiration</label>
+                    <input  type="text" class="form-control m-2 " name="date_expiration" [(ngModel)]="userModel.date_expiration"  #date="ngModel" >
+                </div>
+                <div class="form-group col-8 d-flex" [class.d-none]="num_carte.invalid">
+                    <label class="m-2">Code</label>
+                    <input  type="number" class="form-control m-2 " name="code" [(ngModel)]="userModel.code"  #code="ngModel" >
+                </div>
+            </fieldset>
+            <button  [disabled]="userForm.form.invalid" class="btn btn-primary mt-2" type="submit">Ajouter</button>
+
+        </fieldset>
+
+
+    </form>
+    
+</div>
+ 
+ 
